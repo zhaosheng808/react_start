@@ -1,0 +1,24 @@
+.app_menu {
+  width: 250px;
+  float: left;
+  height: 100%;
+  background-color: #EEF1F6;
+  overflow: auto;
+  .app_menu_inner {
+    padding-bottom: 40px;
+  }
+  .el-menu-item{
+    a{
+      color: #bfcbd9;
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+  }
+  .el-menu-item.is-active {
+    a{
+      color: #20a0ff;
+    }
+  }
+}
