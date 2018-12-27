@@ -23,7 +23,7 @@ class Header extends Component {
     const {admin} = this.props;
     return(
       <div className="app_header">
-        <div className="appIcon">新华网</div>
+        <div className="appIcon">XX网</div>
         <div className="user_info">
           <div className="img_head">
             <img src={admin.head_image} alt="" className="head_img"/>

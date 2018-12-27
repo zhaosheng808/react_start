@@ -1,7 +1,18 @@
 /**
  * Created by DELL on 2017/12/7.
  */
+// 获取用户本地信息
+const getUserData_storage = function () {
+  const userInfo_string_escape = sessionStorage.getItem('userInfo');
 
+  let userInfo = {};
+  if (userInfo_string_escape) {
+    // 进行过编码处理 需要解密
+    let userInfo_string = window.decodeURIComponent(userInfo_string_escape);
+    userInfo = JSON.parse(userInfo_string);
+  }
+  return userInfo;
+};
 export default {
   addEventHandler: (target, type, fn) => {
     if (target.addEventListener) {
@@ -149,5 +160,7 @@ export default {
   //清除cookie
   clearCookie: (name) => {
     // setCookie(name, "", -1);
-  }
+  },
+  // 获取storage 的用户信息
+  getUserData_storage: getUserData_storage,
 }

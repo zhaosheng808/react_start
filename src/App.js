@@ -32,11 +32,9 @@ class App extends Component {
      * 刷新会导致用户数据丢失,
      * 如果有本地数据，需要将用户信息从本地储存中加载到redux中
      * */
-    const userInfo_string = tools.getCookie('xinhua_userInfo');
-    let userInfo = {};
-    if (userInfo_string) {
-      userInfo = JSON.parse(userInfo_string);
-    }
+
+    const userInfo = tools.getUserData_storage();
+
     if (userInfo.token) {
       this.props.login(userInfo);
     }
@@ -46,22 +44,15 @@ class App extends Component {
   }
 
   authLogin = () => {
-    const userInfo_string = tools.getCookie('xinhua_userInfo');
-    let userInfo = {};
-    if (userInfo_string) {
-      userInfo = JSON.parse(userInfo_string);
-    }
+    const userInfo = tools.getUserData_storage();
     const {admin = {}} = this.props;
     if (admin.token || userInfo.token) {  // 已登录
       return <Layout/>
     } else {                                           // 未登录 -》 重定向到登录页面
-      let backurl = '';
-      if (this.props.location) {
-        backurl = this.props.location.pathname;
-      }
+      const callback = window.location.href;
       return <Redirect to={{
         pathname: '/login',
-        search: backurl ? '?backurl=' + encodeURIComponent(backurl) : '',
+        search: callback ? '?callback=' + encodeURIComponent(callback) : '',
       }}/>
     }
 

@@ -16,28 +16,38 @@ class Login extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      appName: '新华网内容管理系统',
+      appName: 'XXX 内容管理系统',
+      appName_en: 'Content Management System of XXX',
       form: {
         password: '',
         username: ''
       },
       rules: {
         username: [
-          {required: true, message: '账号不能为空', trigger: 'blur'}
+          {required: true, message: '账号不能为空', trigger: 'change'}
         ],
         password: [
-          {required: true, message: '密码不能为空', trigger: 'blur'},
+          {required: true, message: '密码不能为空', trigger: 'change'},
         ]
       }
     }
   }
 
   componentDidMount() {
+    this.checkHasLogin();
   }
 
   componentWillUnmount() {
   }
-
+  // 检测用户是否登录
+  checkHasLogin = () => {
+    const userInfo = tools.getUserData_storage();
+    if (userInfo.token) { // 用户已登录
+      if (this.props.history) {
+        this.props.history.push('/');
+      }
+    }
+  };
   handleSubmit(e) {
     if (e) {
       e.preventDefault();
@@ -58,6 +68,11 @@ class Login extends Component {
   // 提交表单
   submitForm = () => {
     const {username, password} = this.state.form;
+    const userInfo = {'user_name': '小二', 'token': '1234'};
+    setTimeout(() => {
+      this.loginSuccess(userInfo);
+    }, 2000);
+    return false;
     httpRequest({
       url: API.login,
       type: 'POST',
@@ -92,12 +107,12 @@ class Login extends Component {
     })
   };
   loginSuccess = (userInfo) => {
+    const userInfo_string = JSON.stringify(userInfo);
+    // 简单加密
+    const userInfo_string_escape = window.encodeURIComponent(userInfo_string);
+    sessionStorage.setItem('userInfo', userInfo_string_escape);
     this.props.login(userInfo);
-    // sessionStorage.setItem('xjb_userInfo', JSON.stringify(userInfo));
-    const userInfo_without_node = {...userInfo, nodes: null};
-    const userInfo_string = JSON.stringify(userInfo_without_node);
-    // 30分钟过期
-    tools.setCookie('xinhua_userInfo', userInfo_string, 30 / (24 * 60));
+
     this.setState({
       isLoading: false
     });
@@ -107,8 +122,12 @@ class Login extends Component {
       type: 'success'
     });
     const params = tools.getParams(decodeURIComponent(window.location.search));
-    const backurl = params.backurl || '/';
-    this.props.history.push(backurl);
+    const callback = params.callback;
+    if (callback) {
+      window.location.href = callback;
+    } else{
+      this.props.history.push('./');
+    }
   };
 
   onChange = (key, value) => {
@@ -124,14 +143,14 @@ class Login extends Component {
   };
 
   render() {
-    const {appName, isLoading} = this.state;
+    const {appName, appName_en, isLoading} = this.state;
     return (
       <div className="page_wrapper">
         <div className="login">
           <div className="login_left">
             <div className="app_name">
               <p className="title">{appName}</p>
-              <p className="sub_title">Content Management System of News.cn</p>
+              <p className="sub_title">{appName_en}</p>
 
             </div>
           </div>
