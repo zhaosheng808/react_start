@@ -15,7 +15,7 @@ class Header extends Component {
     this.state={}
   }
   quit = () => {
-    sessionStorage.removeItem('xjb_userInfo');
+    sessionStorage.removeItem('userInfo');
     this.props.signOut();
   };
 

@@ -121,10 +121,10 @@ class Login extends Component {
       message: `欢迎您，${userInfo.user_name}`,
       type: 'success'
     });
-    const params = tools.getParams(decodeURIComponent(window.location.search));
+    const params = tools.getParams();
     const callback = params.callback;
     if (callback) {
-      window.location.href = callback;
+      window.location.href = decodeURIComponent(callback);
     } else{
       this.props.history.push('./');
     }
