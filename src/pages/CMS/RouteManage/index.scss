@@ -1,0 +1,66 @@
+.menu_center {
+  min-width: 900px;
+  min-height: 600px;
+  background: #fff8dc;
+  padding: 20px
+}
+.tree_box{
+  max-height: 526px;
+  overflow: auto;
+}
+
+.menu_block {
+  border: 1px solid #00d08d;
+  box-sizing: border-box;
+}
+
+.block_title {
+  color: #fff;
+  font-size: 18px;
+  background: #00d08d;
+  padding: 10px;
+}
+
+.system_menu {
+  width: 350px;
+  float: left;
+}
+
+.menu_detail {
+  margin: 0 60px 0 360px;
+}
+.action_table{
+  padding-bottom: 20px;
+  margin-top: 20px;
+}
+.notice{
+  font-size: 14px;
+  min-height: 26px;
+  line-height: 26px;
+  color: red;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  i{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+  }
+}
+.notice:before{
+  content: '*';
+  margin-right: 6px;
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  top: 6px;
+}
+
+.form_wrapper{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 30px 0 0;
+  display: inline-block;
+  .el-input, .el-input__inner{
+    max-width: none;
+  }
+}

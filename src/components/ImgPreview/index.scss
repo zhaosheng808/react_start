@@ -1,0 +1,105 @@
+.preview_container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.92);
+  z-index: 10000;
+  overflow: hidden;
+  text-align: center;
+  margin: auto;
+  .img_wrp {
+    position: absolute;
+    cursor: move;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    //height: 600px;
+    //
+    //width: 542px;
+    //height: 304px;
+    //top: 237px;
+    //left: 331.5px;
+    //background-color: red;
+    height: calc(100% - 100px);
+    //overflow: hidden;
+    img {
+      width: 100%;
+
+      height: 100%;
+      object-fit: contain;
+      //min-height: 50px;
+      //min-width: 50px;
+      //max-height: calc(100% - 100px);
+      //max-width: 100%;
+    }
+    .img_preview_close {
+     cursor: pointer;
+      display: inline-block;
+      position: absolute;
+      right: -28px;
+      top: -28px;
+      vertical-align: middle;
+      width: 55px;
+      height: 55px;
+      background: url(../../assets/images/sprite.png) no-repeat;
+      background-position: -422px -165px;
+      -webkit-background-size: 487px 462px;
+      background-size: 487px 462px
+    }
+  }
+  .img_opr_container{
+    position: fixed;
+    left: 50%;
+    bottom: 100px;
+    margin-left: -325px;
+    width: 650px;
+    text-align: center;
+    z-index: 2;
+    .img_opr_list{
+      display: inline-block;
+      border-radius: 45px;
+      padding: 0 4px;
+      line-height: 32px;
+      background: hsla(0,0%,100%,.1);
+      margin: 0 auto;
+      overflow: hidden;
+      //background-color: rgba(0,0,0,.15);
+    }
+    .img_opr_item.disabled{
+      cursor: not-allowed;
+      opacity: .3;
+    }
+    .img_opr_item{
+      float: left;
+      display: block;
+      padding: 0 32px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      i{
+        display: inline-block;
+        vertical-align: middle;
+        width: 60px;
+        height: 60px;
+        background: url(../../assets/images/sprite.png) no-repeat;
+        -webkit-background-size: 487px 462px;
+        background-size: 487px 462px;
+      }
+      .arrow_left{
+        background-position: -256px -322px;
+      }
+      .arrow_right{
+        background-position: -196px -150px;
+      }
+      .icon_download{
+        background-position: -136px -322px;
+      }
+      .icon_rotate{
+        background-position: -316px -322px;
+      }
+    }
+  }
+}

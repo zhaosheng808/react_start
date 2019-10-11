@@ -16,7 +16,7 @@ class Dashboard extends Component {
       marginTop: '150px'
     };
     return(
-      <h1 className="wel" style={style}>欢迎使用 XXXX 后台管理系统</h1>
+      <h1 className="wel" style={style}>欢迎使用 吱声 运营管理平台</h1>
     )
   }
 }

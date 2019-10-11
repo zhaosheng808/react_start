@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 
 
 import admin from './models/admin';
+import detailInfo from './models/salesDetailPage'
 
 
 // reducer 就是一个纯函数，接收旧的 state 和 action，返回新的 state。
@@ -22,6 +23,7 @@ reducer首先用action中传入的type属性来判断我们要做的是哪种操
 * */
 const reducers = combineReducers({
     admin,
+    detailInfo,
   // more state
 });
 

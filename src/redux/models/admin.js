@@ -10,13 +10,13 @@ const defaultState = {
   // head_image: "",
   // is_super: 1,
   // login_name: "dxp",
-  // mobile: "",
+  // mobile: "18224454519",
   // reporter_id: 0,
   // role_id: 1,
   // role_status: 1,
   // token: "AmJV4QxrXpwlVwoZtiYcvMfSuIhSoNyIuL9cGlmrYqbpqeGj2A63d/fHgTvyZ5VJypRj/hV4DNJg4joR7BfrD2I5dy737EIazcWhgCF5XgKRl1TT8b+gAsOuOwA3oZVo5kx+RG+VEEJfTSRw+zAeIrOhH6h6v7zaFG0XZFdwzMecE2Ywu/fHYRmofs2h+4bUvCIjV6bh26BmSGGByGxQB4Ibz6fI3b4IXN/HT9uWzbo=",
   // user_id: 2,
-  // user_name: "",
+  // user_name: "董兴平",
 };
 
 export default function reduce(state = defaultState, action = {}) {

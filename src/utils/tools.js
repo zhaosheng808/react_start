@@ -1,19 +1,8 @@
 /**
  * Created by DELL on 2017/12/7.
  */
-// 获取用户本地信息
-const getUserData_storage = function () {
-  const userInfo_string_escape = sessionStorage.getItem('userInfo');
 
-  let userInfo = {};
-  if (userInfo_string_escape) {
-    // 进行过编码处理 需要解密
-    let userInfo_string = window.decodeURIComponent(userInfo_string_escape);
-    userInfo = JSON.parse(userInfo_string);
-  }
-  return userInfo;
-};
-export default {
+const tools = {
   addEventHandler: (target, type, fn) => {
     if (target.addEventListener) {
       target.addEventListener(type, fn);
@@ -39,7 +28,7 @@ export default {
       const str = url.substr(start + 1);
       const strs = str.split("&");
       for (let i = 0; i < strs.length; i++) {
-        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+        theRequest[strs[i].split("=")[0]] = strs[i].split("=")[1];
       }
     }
     return theRequest;
@@ -113,6 +102,10 @@ export default {
     if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
       return "IE";
     } //判断是否IE浏览器
+    // // 360浏览器
+    // if ((window.navigator.userProfile + '') === 'null') {
+    //   return "360";
+    // }
   },
   sortBy: function (attr, rev) {
     /*
@@ -139,7 +132,7 @@ export default {
       return 0;
     }
   },
-  //设置cookie
+  // 设置cookie
   setCookie: (cname, cvalue, exdays) => {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -157,10 +150,83 @@ export default {
     }
     return "";
   },
-  //清除cookie
+  // 清除cookie
   clearCookie: (name) => {
     // setCookie(name, "", -1);
   },
-  // 获取storage 的用户信息
-  getUserData_storage: getUserData_storage,
-}
+  // 显示loading
+  show_loading: function () {
+    const content_loading = document.querySelector('.content_loading');
+    if (content_loading) {
+      content_loading.style.display = 'block';
+    }
+  },
+  // 隐藏loading
+  hide_loading: function () {
+    const content_loading = document.querySelector('.content_loading');
+    if (content_loading) {
+      content_loading.style.display = 'none';
+    }
+  },
+  /*
+   * 权限验证， 判断用户是否有该按钮权限
+   * @btn_name 按钮名称
+   * @scope 组件内部this  // 通过scope.props.location.pathname 获取当前路由信息
+   * */
+  validatePower(btn_name, scope) {
+    // console.log(btn_name,scope)
+    let path = '';
+    if (scope && scope.props && scope.props.location) {
+      path = scope.props.location.pathname;
+    }
+    const userInfo = this.getUserData();
+    const userNodeList = userInfo.userNodeList;
+    
+    // 是否有权限
+    let hasPower = false;
+
+    if (userNodeList) {
+      userNodeList.forEach((item) => {  // 一级菜单
+        if (item.childList) {
+          item.childList.forEach((secondItem) => {  // 二级菜单
+            if (path === secondItem.route && secondItem.childList) {
+              secondItem.childList.forEach((thirdItem) => {        // 按钮
+                // if (thirdItem.childList) {
+                //   thirdItem.childList.forEach((btnItem) => {
+                //     if (btn_name === btnItem.btn) {
+                //       hasPower = true
+                //     }
+                //   })
+                // }
+
+                if (thirdItem.button === btn_name) {
+                  hasPower = true
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+    return hasPower
+  },
+  // 设置本地用户信息
+  setUserData: function (userInfo = {}) {
+    localStorage.setItem('zishengCMS_userInfo', encodeURIComponent(JSON.stringify(userInfo)))
+  },
+  // 获取用户本地信息
+  getUserData: function () {
+    let userInfo = {};
+    const userInfo_string = localStorage.getItem('zishengCMS_userInfo');
+    if (userInfo_string) {
+      userInfo = JSON.parse(decodeURIComponent(userInfo_string))
+    }
+    return userInfo;
+  },
+  // 移除 storage 的用户信息
+  removeUserData: function () {
+    localStorage.removeItem('zishengCMS_userInfo');
+  },
+};
+
+export default tools;

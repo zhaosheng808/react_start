@@ -3,58 +3,22 @@ import './side.scss';
 import {NavLink} from 'react-router-dom';
 import {Menu} from 'element-react'
 import {connect} from "react-redux";
-
-@connect(state => ({
-    admin: state.admin
-  }),{}
-)
+import menus from '@/config/menus';
 
 export default
+@connect(state => ({
+    admin: state.admin
+  }), {}
+)
 class AppMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      testNodes: [
-        {node_name: '系统管理', children: [
-          {'node_name': '页面1', node_front_route: '/page1'},
-          {'node_name': '工作台', node_front_route: '/dashboard'},
-          {'node_name': '登录', node_front_route: '/login'},
-          {'node_name': '404', node_front_route: '/404'},
-          ]
-        },
-        {node_name: '内容管理', children: [
-          {'node_name': '页面1', node_front_route: '/page1'},
-          {'node_name': '工作台', node_front_route: '/dashboard'},
-          {'node_name': '登录', node_front_route: '/login'},
-          {'node_name': '404', node_front_route: '/404'},
-        ]
-        },
-      ]
-    }
+    this.state = {}
   }
 
-  componentDidMount(){
-    // this.getUserPermissions()
-  }
+  componentDidMount() {
 
-  // //获取用户权限
-  // getUserPermissions =()=>{
-  //   httpRequest({
-  //     url : API.user_permissions,
-  //     type : 'GET',
-  //     data : {}
-  //   }).done((res)=>{
-  //     if(res.code===0){
-  //       this.setState({
-  //         menus : res.data
-  //       })
-  //     }else {
-  //       Message(res.msg)
-  //     }
-  //   }).fail(()=>{
-  //     Message('内部服务器错误')
-  //   })
-  // }
+  }
 
   onOpen() {
 
@@ -64,13 +28,82 @@ class AppMenu extends Component {
 
   }
 
+  renderMenus = () => {
+    // const menusArr = menus || [];
+    // // 筛选用户拥有的菜单
+    // let userNode = [];
+    //
+    // if (this.props.admin && this.props.admin.userNodeList) {
+    //   userNode = this.props.admin.userNodeList;
+    // }
+    // const userPath = [];   // 用户拥有的所以path
+    // userNode.forEach(item => {
+    //   userPath.push(item.route);
+    //   if (item.childList) {
+    //     item.childList.forEach(secondItem => {
+    //       userPath.push(secondItem.route);
+    //     })
+    //   }
+    // });
+    // const userMenu = [];
+    // menusArr.forEach(item => {
+    //   // 筛选存在用户权限的路由
+    //   if (userPath.includes(item.webRoute)) {
+    //     const firstMenuItem = {
+    //       node_name: item.node_name,
+    //       webRoute: item.webRoute,
+    //       hidden: item.hidden
+    //     };
+    //     const firstMenuChild = [];
+    //     if (item.children) {
+    //       item.children.forEach(childItem => {
+    //         if (userPath.includes(childItem.webRoute)) {
+    //           const secondMenuItem = {
+    //             node_name: childItem.node_name,
+    //             webRoute: childItem.webRoute,
+    //             hidden: childItem.hidden,
+    //           };
+    //           firstMenuChild.push(secondMenuItem);
+    //         }
+    //       })
+    //     }
+    //     firstMenuItem.children = firstMenuChild;
+    //     userMenu.push(firstMenuItem);
+    //   }
+    // });
+    const menuNode = menus.map((item, index) => {
+    // const menuNode = userMenu.map((item, index) => {
+      return <Menu.SubMenu index={`${index}`}
+                           key={index}
+                           title={<div>
+                             {/*<i className="el-icon-menu" />*/}
+                             {item.node_name}</div>}
+      >
+        {item.children.map((childItem, childIndex) => {
+          const is_hidden = childItem.hidden;  // 1 为菜单 0 不是菜单二级页面
+          if (!is_hidden) {
+            return (<Menu.Item index={`${index}-${childIndex}`}
+                               key={`${index}-${childIndex}`}>
+              <NavLink to={childItem.webRoute}
+                       activeClassName="active">{childItem.node_name}</NavLink>
+            </Menu.Item>)
+          } else {
+            return '';
+          }
+        })}
+      </Menu.SubMenu>
+    });
+    return menuNode;
+  };
+
   render() {
-    const menus = this.props.admin.nodes||this.state.testNodes;
+    // const menus = this.props.admin.nodes || this.state.menus;
+
     return (
       <div className="app_menu">
         <div className="app_menu_inner">
           <Menu
-            defaultActive="0-0"
+            // defaultActive="0-0"
             className="el-menu-vertical-demo"
             theme="light"
             defaultOpeneds={[1]}
@@ -78,22 +111,7 @@ class AppMenu extends Component {
             onClose={this.onClose.bind(this)}
             uniqueOpened={false}
           >
-            {menus.map((item, index) => {
-              return <Menu.SubMenu index={`${index}`}
-                                   key={index}
-                                   title={<div>
-                                     {/*<i className="el-icon-menu" />*/}
-                                     {item.node_name}</div>}
-                                   >
-                  {item.children.map((childItem, childIndex) => {
-                    return <Menu.Item index={`${index}-${childIndex}`}
-                                      key={`${index}-${childIndex}`}>
-                      <NavLink to={childItem.node_front_route}
-                               activeClassName="active">{childItem.node_name}</NavLink>
-                    </Menu.Item>
-                  })}
-              </Menu.SubMenu>
-            })}
+            {this.renderMenus()}
           </Menu>
         </div>
       </div>

@@ -1,11 +1,7 @@
 # react_start
 
-* react脚手架 基于`react-router4`、`redux` 用于快速构建cms系统
-
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+#### 介绍
+react_start 后台管理系统
 
 
 ## 项目结构
@@ -59,4 +55,18 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ``npm run build``
 
-*****
+## 服务器地址
+
+测试服务器
+```
+服务器：   
+目录：    
+线上地址：
+```
+
+正式服务器
+```
+服务器：   
+目录：     
+线上地址： 
+```

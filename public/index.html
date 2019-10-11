@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
     <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="renderer" content="webkit">
     <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -19,13 +27,144 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>吱声运营管理平台</title>
+    <style>
+      #page-loading{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #dedede;
+        z-index: 10;
+        font-size: 12px;
+      }
+      .base {
+        height: 9em;
+        left: 50%;
+        margin: -7.5em;
+        padding: 3em;
+        position: absolute;
+        top: 50%;
+        width: 9em;
+        transform: rotateX(45deg) rotateZ(45deg);
+        transform-style: preserve-3d;
+        box-sizing: content-box;
+      }
+
+      .cube,
+      .cube:after,
+      .cube:before {
+        content: '';
+        float: left;
+        height: 3em;
+        position: absolute;
+        width: 3em;
+      }
+
+      /* Top */
+      .cube {
+        background-color: #05afd1;
+        position: relative;
+        transform: translateZ(3em);
+        transform-style: preserve-3d;
+        transition: .25s;
+        box-shadow: 13em 13em 1.5em rgba(0, 0, 0, 0.1);
+        animation: anim 1s infinite;
+      }
+      .cube:after {
+        background-color: #049dbc;
+        transform: rotateX(-90deg) translateY(3em);
+        transform-origin: 100% 100%;
+      }
+      .cube:before {
+        background-color: #048ca7;
+        transform: rotateY(90deg) translateX(3em);
+        transform-origin: 100% 0;
+      }
+      .cube:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .cube:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .cube:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .cube:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+      .cube:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+      .cube:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+      .cube:nth-child(7) {
+        animation-delay: 0.35s;
+      }
+      .cube:nth-child(8) {
+        animation-delay: 0.4s;
+      }
+      .cube:nth-child(9) {
+        animation-delay: 0.45s;
+      }
+
+      @keyframes anim {
+        50% {
+          transform: translateZ(0.5em);
+        }
+      }
+
+
+      /*文本超出1行显示...*/
+      .limit-line1 {
+        word-break: keep-all;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /*文本超出2行显示...*/
+      .limit-line2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /*文本超出3行显示...*/
+      .limit-line3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /*强制换行*/
+      .break_all {
+        word-break: break-all;
+      }
+    </style>
   </head>
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="page-loading">
+      <div class="base">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

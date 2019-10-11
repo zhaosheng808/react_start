@@ -1,21 +1,16 @@
 /**
  * Created by DELL on 2018/10/8.
  */
-/*
- * 测试api: http://cms-live.foundao.com/bjnews_cms/
- * 正式：   http://uuadmcms.chanjet.com/
- * */
+import {API_HOST} from './baseConfig';
 
-const root = 'http://cms-happy.foundao.com/bjnews_cms/';
-
+const host = API_HOST + '?service=';
+// const upload_host = API_HOST_upload
 /*
  * package 配置代理
  * "proxy": "http://cms-live.foundao.com/"
  * */
-
+// micro-cms/   
 export default {
   // =============所有api在此处管理============
-
-  // 系统管理
-  login: root + 'login/login',  // 用户登录
+ login: host + 'App.Login.In'
 }

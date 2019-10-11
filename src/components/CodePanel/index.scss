@@ -1,0 +1,25 @@
+
+.codePanel{
+  padding: 6px;
+  border-radius: 4px;
+  line-height: 16px;
+  font-size: 12px;
+  background: #f7f7f7;
+  min-height: 60px;
+  max-height: 600px;
+  overflow: auto;
+  pre {
+    overflow: visible;
+    margin-bottom: 0;
+    .string { color: green; }        /*字符串的样式*/
+    .number { color: darkorange; }    /*数字的样式*/
+    .boolean { color: blue; }        /*布尔型数据的样式*/
+    .null { color: magenta; }        /*null值的样式*/
+    .key { color: red; }            /*key值的样式*/
+  }
+  .code-string{color:green;}
+  .code-number{color:darkorange;}
+  .code-boolean{color:#000033;}
+  .code-null{color:magenta;}
+  .code-key{color:#003377;font-weight:bold;}
+}
